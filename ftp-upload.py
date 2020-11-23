@@ -4,11 +4,12 @@ import logging
 import sys
 from pathlib import Path
 from paramiko import SSHClient, AutoAddPolicy
+import pathlib
 
 from credentials import Credentials
 
 # CONFIGURATION
-PATH_TO_FILES = Path('/home/zeroicq/upwork/Michael/ftp-upload/txt')
+PATH_TO_FILES = Path(r'C:\Users\alexey\dev\ftp-upload\txt')
 FILENAMES = [
     'protowords.txt',
     'synonyms.txt',
@@ -27,7 +28,7 @@ live_credentials = Credentials(
     ]
 )
 editorial_credentials = Credentials(
-    host='127.0.0.1',
+    host='localhost',
     port=2222,
     user='user',
     password='pass',
@@ -41,9 +42,10 @@ editorial_credentials = Credentials(
 LIVE_TYPE = 'live'
 EDITORIAL_TYPE = 'redaktionsystem'
 
+cur_dir = pathlib.Path(__file__).parent.absolute()
 logging.basicConfig(
-    stream=sys.stdout,
-    level=logging.INFO,
+    filename=cur_dir / 'log.txt',
+    level=logging.DEBUG,
     format='[%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s - %(message)s'
 )
 
@@ -62,7 +64,7 @@ def main(target_type: str):
             hostname=creds.host,
             port=creds.port,
             username=creds.user,
-            password=creds.password
+            password=creds.password,
         )
 
         ftp_client = ssh_client.open_sftp()
