@@ -15,12 +15,13 @@ FILENAMES = [
     'synonyms.txt',
     'synonyms_querytime.txt'
 ]
-CMD = 'salam'
+
+CMD = 'ls'
 
 live_credentials = Credentials(
     host='ip',
     user='aaa',
-    port=220,
+    port=22,
     password='bbb',
     paths=[
         '/var/solr/data/trenddeko/conf',
@@ -29,7 +30,7 @@ live_credentials = Credentials(
 )
 editorial_credentials = Credentials(
     host='localhost',
-    port=2222,
+    port=22,
     user='user',
     password='pass',
     paths=[
