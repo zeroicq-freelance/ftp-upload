@@ -9,7 +9,8 @@ import pathlib
 from credentials import Credentials
 
 # CONFIGURATION
-PATH_TO_FILES = Path(r'C:\Users\alexey\dev\ftp-upload\txt')
+LIVE_PATH_TO_FILES = Path(r'C:\Users\alexey\dev\ftp-upload\txt')
+EDITORIAL_PATH_TO_FILES = Path(r'C:\Users\alexey\dev\ftp-upload\txt')
 FILENAMES = [
     'protowords.txt',
     'synonyms.txt',
@@ -55,8 +56,10 @@ def main(target_type: str):
 
     if target_type == LIVE_TYPE:
         creds = live_credentials
+        PATH_TO_FILES = LIVE_PATH_TO_FILES
     else:
         creds = editorial_credentials
+        PATH_TO_FILES = EDITORIAL_PATH_TO_FILES
 
     ssh_client = SSHClient()
     try:
